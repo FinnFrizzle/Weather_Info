@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Chart from '../components/chart';
+import googleMap from '../components/google_Maps.js';
 
 class WeatherList extends Component {
 
@@ -9,10 +10,11 @@ class WeatherList extends Component {
     const temps = cityData.list.map(tempArray => tempArray.main.temp);
     const pressure = cityData.list.map(presArray => presArray.main.pressure);
     const humidity = cityData.list.map(humArray => humArray.main.humidity);
+    const { lon, lat } = cityData.city.coord;
 
     return (
       <tr key={name}>
-        <td> {name} </td>
+        <td> <googleMap lon={lon} lat={lat} /> </td>
         <td> <Chart
           data={temps.map(temp => temp - 273.15)}
           color="green"
@@ -24,15 +26,15 @@ class WeatherList extends Component {
   }
 
   render() {
-    // &nbsp; (temp fix - best with css ofc) (blankline) is to make the temp, pressure and humidity same size
+
     return (
       <table className="table table-hover">
         <thead>
           <tr>
             <th> City </th>
             <th> Temperature (°C) </th>
-            <th> Pressure (hPa) &nbsp; </th>
-            <th> Humidity (%) &nbsp; &nbsp; &nbsp; </th>
+            <th> Pressure (hPa)   </th>
+            <th> Humidity (%)     </th>
           </tr>
         </thead>
         <tbody>
