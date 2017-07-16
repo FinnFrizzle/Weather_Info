@@ -7,7 +7,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {term: ""};
+    this.state = {term: "", countryCode: "DK"};
 
     this.onInputChange1 = this.onInputChange1.bind(this);
     this.onInputChange2 = this.onInputChange2.bind(this);
