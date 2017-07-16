@@ -9,21 +9,27 @@ class SearchBar extends Component {
 
     this.state = {term: ""};
 
-    this.onInputChange = this.onInputChange.bind(this);
+    this.onInputChange1 = this.onInputChange1.bind(this);
+    this.onInputChange2 = this.onInputChange2.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onInputChange(event) {
+  onInputChange1(event) {
     this.setState({term: event.target.value});
   }
+  onInputChange2(event) {
+    this.setState({countryCode: event.target.value});
+  }
+
 
   onFormSubmit(event) {
     // Prevent browser from reloading on submit
     event.preventDefault();
 
     // Fetch data
-    this.props.fetchWeather(this.state.term);
+    this.props.fetchWeather(this.state.term, this.state.countryCode);
     this.setState({term: ''});                 // clear input-field
+
 
   }
 
@@ -34,7 +40,13 @@ class SearchBar extends Component {
           placeholder="Choose city"
           className="form-control"
           value={this.state.term}
-          onChange={this.onInputChange} />
+          onChange={this.onInputChange1} />
+
+          <input
+            placeholder="Choose countrycode"
+            className="form-control"
+            value={this.state.countryCode}
+            onChange={this.onInputChange2} />
 
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary"> Submit </button>
